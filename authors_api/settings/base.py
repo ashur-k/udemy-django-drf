@@ -76,16 +76,19 @@ TEMPLATES = [
 WSGI_APPLICATION = 'authors_api.wsgi.application'
 
 
-# DATABASES = {"default": env.db("DATABASE_URL")}
-# DATABASES["default"]["ATOMIC_REQUESTS"] = True
+DATABASES = {"default": env.db("DATABASE_URL")}
+DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.sqlite3',
-    }
-}
-    
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'mydb',
+#         'USER': 'ashur',
+#         'PASSWORD': 'Sonumerijan123',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432'
+#     }
+# }
 
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.Argon2PasswordHasher",
@@ -155,6 +158,8 @@ MEDIA_ROOT = str(ROOT_DIR / "mediafiles")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_URLS_REGEX = r"^/api/.*$"
+
+AUTH_USER_MODEL = "users.User"
 
 LOGGING = {
     "version": 1,
