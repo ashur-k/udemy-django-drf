@@ -80,16 +80,6 @@ WSGI_APPLICATION = 'authors_api.wsgi.application'
 DATABASES = {"default": env.db("DATABASE_URL")}
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'mydb',
-#         'USER': 'ashur',
-#         'PASSWORD': 'Sonumerijan123',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432'
-#     }
-# }
 
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.Argon2PasswordHasher",
@@ -168,6 +158,11 @@ CELERY_TIMEZONE = "Europe/London"
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
+
+REST_FRAMEWORK = {
+    "EXCEPTION_HANDLER": "core_apps.common.exceptions.common_exception_handler",
+    "NON_FIELD_ERRORS_KEY": "error"
+}
 
 LOGGING = {
     "version": 1,
