@@ -33,13 +33,21 @@ THIRD_PARTY_APPS = [
     'corsheaders',
     'djcelery_email',
     'djoser',
-    'rest_framework_simplejwt'
+    'rest_framework_simplejwt',
+    'haystack',
+    'drf_haystack'
 ]
 
 LOCAL_APPS = [
     "core_apps.common",
     "core_apps.users",
     "core_apps.profiles",
+    "core_apps.articles",
+    "core_apps.favorites",
+    "core_apps.reactions",
+    "core_apps.ratings",
+    "core_apps.comments",
+    "core_apps.search"
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -175,7 +183,7 @@ SIMPLE_JWT = {
         "Bearer",
         "JWT",
     ),
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=120),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "SIGNING_KEY": env("SIGNING_KEY"),
     "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
@@ -202,6 +210,16 @@ DJOSER = {
     },
 }
 
+HAYSTACK_CONNECTIONS = {
+    "default": {
+        "ENGINE": "haystack.backends.whoosh_backend.WhooshEngine",
+        "PATH": ROOT_DIR / "whoosh_index"
+    }
+}
+
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
+
+HAYSTACK_SIGNAL_PROCESSOR = "haystack.signals.RealtimeSignalProcessor"
 
 LOGGING = {
     "version": 1,
